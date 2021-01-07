@@ -1,0 +1,17 @@
+#loopback
+auto lo
+iface lo inet loopback
+
+#enp2s0
+auto enp2s0
+allow-hotplug enp2s0
+iface enp2s0 inet dhcp
+
+#eno1
+auto eno1
+iface eno1 inet static
+address 10.0.42.199
+netmask 255.255.255.0
+# network 10.0.42.0
+# broadcast 10.0.42.255
+# gateway 10.0.42.1              
