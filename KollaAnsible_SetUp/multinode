@@ -2,7 +2,7 @@
 # additional groups are for more control of the environment.
 [control]
 # These hostname must be resolvable from your deployment host
-localhost ansible_become=true ansible_python_interpreter=/usr/bin/python3
+wally200.cit.tu-berlin.de ansible_user=<USER_NAME> ansible_ssh_private_key_file=<PATH_TOSSH_FILE>_become=true ansible_python_interpreter=/usr/bin/python3
 
 # The above can also be specified as follows:
 #control[01:03]     ansible_user=kolla
@@ -13,10 +13,11 @@ localhost ansible_become=true ansible_python_interpreter=/usr/bin/python3
 control
 
 [compute]
-10.0.42.[198:199] ansible_become=true ansible_python_interpreter=/usr/bin/python3
+wally198.cit.tu-berlin.de ansible_user=<USER_NAME> ansible_ssh_private_key_file=<PATH_TOSSH_FILE>_become=true ansible_python_interpreter=/usr/bin/python3
+wally199.cit.tu-berlin.de ansible_user=<USER_NAME> ansible_ssh_private_key_file=<PATH_TOSSH_FILE>_become=true ansible_python_interpreter=/usr/bin/python3
  
 [monitoring]
-localhost ansible_python_interpreter=/usr/bin/python3
+wally200.cit.tu-berlin.de ansible_user=<USER_NAME> ansible_ssh_private_key_file=<PATH_TOSSH_FILE>_python_interpreter=/usr/bin/python3
 
 # When compute nodes and control nodes use different interfaces,
 # you need to comment out "api_interface" and other interfaces from the globals.yml
@@ -27,7 +28,7 @@ localhost ansible_python_interpreter=/usr/bin/python3
 compute
 
 [deployment]
-localhost       ansible_connection=local become=true
+localhost ansible_connection=local become=true
 
 [baremetal:children]
 control
@@ -41,6 +42,14 @@ control
 
 # You can explicitly specify which hosts run each project by updating the
 # groups in the sections below. Common services are grouped together.
+
+[common:children]
+control
+network
+compute
+storage
+monitoring
+
 [chrony-server:children]
 haproxy
 
@@ -88,16 +97,6 @@ control
 [haproxy:children]
 network
 
-[hyperv]
-#hyperv_host
-
-[hyperv:vars]
-#ansible_user=user
-#ansible_password=password
-#ansible_port=5986
-#ansible_connection=winrm
-#ansible_winrm_server_cert_validation=ignore
-
 [mariadb:children]
 control
 
@@ -122,9 +121,6 @@ monitoring
 
 [storm:children]
 monitoring
-
-[mongodb:children]
-control
 
 [keystone:children]
 control
@@ -201,9 +197,6 @@ control
 control
 compute
 
-[congress:children]
-control
-
 [panko:children]
 control
 
@@ -271,6 +264,19 @@ control
 # Word of caution: Some services are required to run on the same host to
 # function appropriately. For example, neutron-metadata-agent must run on the
 # same host as the l3-agent and (depending on configuration) the dhcp-agent.
+
+# Common
+[cron:children]
+common
+
+[fluentd:children]
+common
+
+[kolla-logs:children]
+common
+
+[kolla-toolbox:children]
+common
 
 # Elasticsearch Curator
 [elasticsearch-curator:children]
@@ -577,16 +583,6 @@ compute
 
 [cyborg-conductor:children]
 cyborg
-
-# Congress
-[congress-api:children]
-congress
-
-[congress-datasource:children]
-congress
-
-[congress-policy-engine:children]
-congress
 
 # Panko
 [panko-api:children]
