@@ -2,18 +2,10 @@
 auto lo
 iface lo inet loopback
 
-## External bridge
-auto br-ex
-iface br-ex inet dhcp
-
 #External network interface: enp2s0
 auto enp2s0
-#allow-hotplug enp2s0
-iface enp2s0 inet manual
-up ifconfig $IFACE 0.0.0.0 up
-up ip link set $IFACE promisc on
-down ip link set $IFACE promisc off
-down ifconfig $IFACE down
+allow-hotplug enp2s0
+iface enp2s0 inet dhcp
 
 #eno1
 auto eno1
