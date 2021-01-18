@@ -1,8 +1,8 @@
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
-ansible_user=lisa
+ansible_user=<USER_NAME>
 ansible_become=True
-ansible_private_key_file={{lookup('env','HOME')}}/.ssh/lyd
+ansible_private_key_file={{lookup('env','HOME')}}/.ssh/<SSH_FILE_NAME>
 
 # These initial groups are the only groups required to be modified. The
 # additional groups are for more control of the environment.
