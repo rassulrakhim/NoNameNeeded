@@ -1,0 +1,23 @@
+---
+- hosts: '*'
+
+  tasks:
+      - name: copy interfaces template
+        ansible.builtin.copy:
+            dest: /tmp/interfaces.envtmpl
+            force: yes
+            src: ../NetworkInterface_Configuration/interfaces.envtmpl
+
+      - name: fill interfaces template
+        ansible.builtin.shell:
+            cmd: export WALLY_SERVER_ID=$(hostname | tail -c 4); envsubst < /tmp/interfaces.envtmpl > /etc/network/interfaces
+
+      - name: copy netplan template
+        ansible.builtin.copy:
+            dest: /tmp/02-netcfg.yaml.envtmpl
+            force: yes
+            src: ../NetworkInterface_Configuration/02-netcfg.yaml.envtmpl
+
+      - name: fill netplan template
+        ansible.builtin.shell:
+            cmd: export WALLY_SERVER_ID=$(hostname | tail -c 4); envsubst < /tmp/02-netcfg.yaml.envtmpl > /etc/netplan/02-netcfg.yaml
