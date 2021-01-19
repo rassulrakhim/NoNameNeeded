@@ -1,0 +1,41 @@
+---
+- hosts: '*'
+
+  tasks:
+      - name: Install python3
+        apt:
+            name: python3
+            update_cache: yes
+
+      - name: Install python3-pip
+        apt:
+            name: python3-pip
+            update_cache: no
+
+      - name: Install python3-dev
+        apt:
+            name: python3-dev
+            update_cache: no
+
+      - name: Install libffi-dev
+        apt:
+            name: libffi-dev
+            update_cache: no
+
+      - name: Install gcc
+        apt:
+            name: gcc
+            update_cache: no
+
+      - name: Install libssl-dev
+        apt:
+            name: libssl-dev
+            update_cache: no
+
+      #   - name: Install docker
+      #     ansible.builtin.shell:
+      #         cmd: pip3 install docker
+
+      #   - name: Uninstall docker-py
+      #     ansible.builtin.shell:
+      #         cmd: pip3 uninstall docker-py

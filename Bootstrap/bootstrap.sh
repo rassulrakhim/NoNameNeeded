@@ -40,6 +40,11 @@ fi
 
 create_inventory
 
-ansible-playbook -i multinode -l test network-bootstrap.yml
+NODE=all
+#NODE=test
+
+ansible-playbook -i multinode -l $NODE network-bootstrap.yml
+
+ansible-playbook -i multinode -l $NODE dependencys-bootstrap.yml
 
 echo "end"
