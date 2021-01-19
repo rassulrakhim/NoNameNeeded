@@ -4,6 +4,8 @@ network:
     version: 2
     renderer: networkd
     ethernets:
+        enp2s0:
+            dhcp4: yes
         eno1:
             dhcp4: no
             addresses:
