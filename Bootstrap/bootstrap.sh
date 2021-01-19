@@ -40,6 +40,6 @@ fi
 
 create_inventory
 
-ansible-playbook -i multinode -l control network-bootstrap.yml
+ansible-playbook -i multinode -l test network-bootstrap.yml
 
 echo "end"
