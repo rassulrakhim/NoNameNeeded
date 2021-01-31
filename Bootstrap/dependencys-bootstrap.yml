@@ -32,10 +32,10 @@
             name: libssl-dev
             update_cache: no
 
-      #   - name: Install docker
-      #     ansible.builtin.shell:
-      #         cmd: pip3 install docker
+      - name: Install docker
+        ansible.builtin.shell:
+            cmd: pip3 install docker
 
-      #   - name: Uninstall docker-py
-      #     ansible.builtin.shell:
-      #         cmd: pip3 uninstall docker-py
+      # - name: Uninstall docker-py
+      #   ansible.builtin.shell:
+      #       cmd: pip3 uninstall docker-py

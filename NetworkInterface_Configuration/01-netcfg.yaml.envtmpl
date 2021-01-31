@@ -7,6 +7,4 @@ network:
         enp2s0:
             dhcp4: yes
         eno1:
-            dhcp4: no
-            addresses:
-                - 10.0.42.${WALLY_SERVER_ID}/24
+            addresses: [10.0.42.${WALLY_SERVER_ID}/24]

@@ -13,15 +13,13 @@ wally200.cit.tu-berlin.de
 # The above can also be specified as follows:
 #control[01:03]     ansible_user=kolla
 
-[test]
-wally145.cit.tu-berlin.de
-
 # The network nodes are where your l3-agent and loadbalancers will run
 # This can be the same as a host in the control group
 [network:children]
 control
 
 [compute]
+wally145.cit.tu-berlin.de
 wally198.cit.tu-berlin.de
 wally199.cit.tu-berlin.de
  
